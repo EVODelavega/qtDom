@@ -90,13 +90,14 @@ var queryDom = (function(D)
         {
             if (typeof param === 'string')
                 return qDom(param);
-            return [param];//assume this is a DOM Node...
+            return param;//assume node, for foreach $(this) notation to work
         };
+	//for jQ compatibility, note: this is REALLY BASIC
         fb.each = function(elems, callback)
         {
             var i;
             for (i=0;i<elems.length;++i)
-            {
+            {//callback $(this), where $ == this module works as jQ, only it exposes the DOM node directly
                 callback.apply(elems[i], [elems[i], i]);
             }
         };
