@@ -77,7 +77,7 @@ var qtAjax = (function()
             dataType: 'data',
             success: defaultCB
         },
-        ajax = function(options)
+        return function(options)
         {
             var p, xhr;
             for (p in defaultSetup)
@@ -108,14 +108,14 @@ var qtAjax = (function()
                 options.dataType === 'json' ? JSON.stringify(options.data) : stringifyObject(options.data)
             );
         };
-        ajax.setup = function(o)
+    }();
+    ajax.setup = function(o)
+    {
+        for (var p in o)
         {
-            for (var p in o)
-            {
-                if (o.hasOwnProperty(p))
-                    defaultSetup[p] = o[p];
-            }
-        };
-        return ajax;
-    }());
+            if (o.hasOwnProperty(p))
+                defaultSetup[p] = o[p];
+        }
+    };
+    return ajax;
 }());
