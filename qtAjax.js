@@ -76,7 +76,7 @@ var qtAjax = (function()
             type: 'GET',
             dataType: 'data',
             success: defaultCB
-        },
+        };
         return function(options)
         {
             var p, xhr;
